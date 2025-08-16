@@ -1,0 +1,13 @@
+# Mówi Netlify gdzie są funkcje
+[build]
+  functions = "netlify/functions"
+
+# Ustawienia funkcji
+[functions]
+  node_bundler = "esbuild"
+
+# Nagłówki CORS (pozwala na komunikację)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"

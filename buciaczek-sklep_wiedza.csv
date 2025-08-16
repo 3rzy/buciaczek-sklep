@@ -1,0 +1,107 @@
+Kategoria,Podkategoria,Opis
+Projekt-Podstawy,Nazwa,buciaczek-sklep
+Projekt-Podstawy,Opis,"Sklep z obuwiem dziecięcym Buciaczek - magiczny świat obuwia dla dzieci 2-6 lat"
+Projekt-Podstawy,Wersja,1.0.0
+Projekt-Podstawy,Lokalizacja,/Users/krzyk/Desktop/buciaczek-sklep
+Hosting,Platforma,Netlify
+Hosting,URL-Produkcja,https://buciaczek.eu
+Hosting,URL-Tymczasowy,https://buciaczek-sklep.netlify.app
+Hosting,Project-ID,7930a74d-54ef-4828-8a2f-f740136a9704
+Hosting,Panel-Admin,https://app.netlify.com/projects/buciaczek-sklep
+DNS,Domena,buciaczek.eu
+DNS,Registrar,Hostido
+DNS,Nameservery,"Netlify DNS (dns1-4.p01.nsone.net)"
+DNS,Status,Aktywne - propagacja zakończona
+DNS,SSL,Automatyczny certyfikat Netlify
+Struktura-Plików,Główny-HTML,index.html
+Struktura-Plików,Konfiguracja-Netlify,netlify.toml
+Struktura-Plików,Konfiguracja-Node,package.json
+Struktura-Plików,Zmienne-Środowiskowe,.env (lokalne)
+Struktura-Plików,Funkcje-API,netlify/functions/ (6 plików)
+Struktura-Plików,Stan-Netlify,.netlify/state.json
+API-Funkcje,get-products,"Pobiera wszystkie produkty z Airtable z cenami, stanami, rozmiarami"
+API-Funkcje,get-products-backup,"Kopia zapasowa funkcji get-products"
+API-Funkcje,check-stock,"Sprawdza dostępność konkretnego produktu w rozmiarze"
+API-Funkcje,update-stock,"Aktualizuje stan magazynowy produktu"
+API-Funkcje,update-size-stock,"Aktualizuje stany per rozmiar"
+API-Funkcje,create-order,"Tworzy nowe zamówienie (przygotowane pod Stripe)"
+Baza-Danych,Typ,Airtable
+Baza-Danych,Base-ID,app6nvI6MipJpvTQp
+Baza-Danych,Tabela-Główna,Produkty
+Baza-Danych,Pola-Kluczowe,"Nazwa, Cena, Opis, Zdjecia, Rozmiary_Stan"
+Baza-Danych,Stany-Magazynowe,"JSON per rozmiar: {""26"":1,""27"":2,""28"":0}"
+Technologie,Frontend,HTML5 + CSS3 + Vanilla JavaScript
+Technologie,Backend,Netlify Functions (Node.js)
+Technologie,CSS-Framework,"Własne style z CSS Grid i Flexbox"
+Technologie,Responsywność,"Mobile-first design z breakpointami"
+Technologie,Ikony,Własne SVG + emoji
+Funkcjonalności,System-Rozmiarów,"26-32 z indywidualnymi stanami magazynowymi"
+Funkcjonalności,Koszyk,LocalStorage z produktami i rozmiarami
+Funkcjonalności,Responsywność,"Pełna responsywność mobile/tablet/desktop"
+Funkcjonalności,Zdjęcia,Prawdziwe zdjęcia z Airtable API
+Funkcjonalności,SEO,"Meta tags, structured data ready"
+Funkcjonalności,Performance,"Lazy loading, optimized images"
+Płatności,System,Stripe (skonfigurowane ale nieaktywne)
+Płatności,Klucze,"Testowe klucze w .env (pk_test_, sk_test_)"
+Płatności,Status,Przygotowane do aktywacji
+Komendy,Rozwój-Lokalny,"npm run dev (uruchamia netlify dev)"
+Komendy,Wdrożenie,"npm run deploy (uruchamia netlify deploy --prod)"
+Komendy,Build,Automatyczny build przez Netlify
+Zmienne-Środowiskowe,AIRTABLE_API_KEY,"path4deoUIVkpgF1x.*** (ustawione w Netlify)"
+Zmienne-Środowiskowe,AIRTABLE_BASE_ID,"app6nvI6MipJpvTQp (ustawione w Netlify)"
+Zmienne-Środowiskowe,STRIPE_PUBLIC_KEY,"pk_test_XXXXXXXXXXXXX (nieaktywne)"
+Zmienne-Środowiskowe,STRIPE_SECRET_KEY,"sk_test_XXXXXXXXXXXXX (nieaktywne)"
+Konfiguracja,Node-Bundler,esbuild
+Konfiguracja,Functions-Path,netlify/functions
+Konfiguracja,CORS,"Access-Control-Allow-Origin: * (wszystkie domeny)"
+Konfiguracja,Cache,Automatyczny cache przez Netlify CDN
+Deployment,Metoda,Manual deploy przez CLI
+Deployment,Build-Logs,https://app.netlify.com/projects/buciaczek-sklep/deploys/
+Deployment,Function-Logs,https://app.netlify.com/projects/buciaczek-sklep/logs/functions
+Deployment,Status,Działający w produkcji
+Performance,CDN,Netlify Global CDN
+Performance,Functions-Region,us-east-2
+Performance,SSL,Automatyczny Let's Encrypt
+Performance,Gzip,Automatyczny przez Netlify
+Bezpieczeństwo,Klucze-API,"Bezpiecznie w Netlify Environment Variables"
+Bezpieczeństwo,HTTPS,Wymuszone przekierowanie
+Bezpieczeństwo,Headers,"Security headers przez Netlify"
+Backup,Kod-Lokalny,/Users/krzyk/Desktop/buciaczek-sklep
+Backup,Functions-Backup,get-products-backup.js
+Backup,Dokumentacja,CSV wiedza + docs
+Sklep-Funkcjonalności,Produkty,Buty dziecięce 2-6 lat
+Sklep-Funkcjonalności,Rozmiary,"26-32 z indywidualnymi stanami"
+Sklep-Funkcjonalności,Ceny,"89.99-90.00 zł (różne per produkt)"
+Sklep-Funkcjonalności,Zdjęcia,"Wysokiej jakości z Airtable"
+Sklep-Funkcjonalności,Koszyk,"Dodawanie/usuwanie z rozmiarami"
+Sklep-Funkcjonalności,Stany-Magazynowe,"Real-time z Airtable API"
+UI-UX,Design,"Pastelowe kolory, przyjazny dzieciom"
+UI-UX,Fonty,"Segoe UI, Tahoma, Geneva, Verdana"
+UI-UX,Layout,"CSS Grid + Flexbox, fully responsive"
+UI-UX,Animacje,"Hover effects, smooth transitions"
+UI-UX,Mobile,"Touch-friendly, optimized for phones"
+Monitoring,Status,Działający w produkcji
+Monitoring,Uptime,99.9% (Netlify SLA)
+Monitoring,Errors,"Function logs w Netlify dashboard"
+Monitoring,Analytics,"Netlify Analytics dostępne"
+Dostęp,Panel-Netlify,https://app.netlify.com/projects/buciaczek-sklep
+Dostęp,DNS-Hostido,"Panel Hostido do zarządzania DNS"
+Dostęp,Airtable,"Bezpośrednia edycja produktów/stanów"
+Dostęp,Kod-Lokalny,/Users/krzyk/Desktop/buciaczek-sklep
+Instrukcje-DNS,Krok-1,"Dodaj domenę w Netlify (Domain management)"
+Instrukcje-DNS,Krok-2,"Skopiuj 4 nameservery z Netlify"
+Instrukcje-DNS,Krok-3,"Wklej nameservery w Hostido DNS 1-4"
+Instrukcje-DNS,Krok-4,"Kliknij 'Zapisz ustawienia' w Hostido"
+Instrukcje-DNS,Krok-5,"Czekaj 1-4h na propagację DNS"
+Instrukcje-Wdrażania,Lokalne-Zmiany,"Edytuj pliki w /Users/krzyk/Desktop/buciaczek-sklep"
+Instrukcje-Wdrażania,Deploy,"cd /Users/krzyk/Desktop/buciaczek-sklep && npx netlify deploy --prod"
+Instrukcje-Wdrażania,Weryfikacja,"Sprawdź https://buciaczek.eu"
+Instrukcje-Produkty,Dodawanie,"Airtable -> Produkty -> Dodaj rekord"
+Instrukcje-Produkty,Edycja-Cen,"Zmień pole 'Cena' w Airtable"
+Instrukcje-Produkty,Stany-Rozmiarów,"Edytuj JSON w polu 'Rozmiary_Stan'"
+Instrukcje-Produkty,Zdjęcia,"Upload do pola 'Zdjecia' w Airtable"
+Status-Projektu,Gotowość,100% - działający w produkcji
+Status-Projektu,Testy,"✅ Desktop ✅ Mobile ✅ API ✅ DNS ✅ SSL"
+Status-Projektu,Następne-Kroki,"Aktywacja płatności Stripe (opcjonalnie)"
+Status-Projektu,Dokumentacja,Kompletna dokumentacja w CSV
+Status-Projektu,Backup,Pełny backup kodu + konfiguracji
