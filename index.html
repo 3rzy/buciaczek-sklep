@@ -35,6 +35,189 @@
             overflow-x: hidden;
         }
 
+        /* 🍪 BANER COOKIES - OBOWIĄZKOWY! */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--text-dark);
+            color: white;
+            padding: 1.5rem;
+            z-index: 10000;
+            box-shadow: 0 -5px 20px var(--shadow);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+
+        .cookie-banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            justify-content: space-between;
+        }
+
+        .cookie-text {
+            flex: 1;
+            min-width: 300px;
+            line-height: 1.5;
+        }
+
+        .cookie-text a {
+            color: var(--accent-mint);
+            text-decoration: underline;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cookie-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .cookie-btn.accept {
+            background: var(--success);
+            color: white;
+        }
+
+        .cookie-btn.accept:hover {
+            background: #38a169;
+        }
+
+        .cookie-btn.reject {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cookie-btn.reject:hover {
+            background: white;
+            color: var(--text-dark);
+        }
+
+        .cookie-btn.settings {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .cookie-btn.settings:hover {
+            background: #9bb5ff;
+        }
+
+        /* 📄 MODAL DOKUMENTÓW PRAWNYCH */
+        .legal-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10001;
+            overflow-y: auto;
+        }
+
+        .legal-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem 1rem;
+        }
+
+        .legal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .legal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--pastel-mint);
+            padding-bottom: 1rem;
+        }
+
+        .legal-header h2 {
+            color: var(--accent-pink);
+            font-size: 1.8rem;
+        }
+
+        .close-legal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .close-legal:hover {
+            color: var(--accent-pink);
+        }
+
+        .legal-text {
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .legal-text h3 {
+            color: var(--accent-mint);
+            margin: 2rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        .legal-text h4 {
+            color: var(--accent-pink);
+            margin: 1.5rem 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .legal-text p {
+            margin-bottom: 1rem;
+        }
+
+        .legal-text ul, .legal-text ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .legal-text li {
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-text strong {
+            color: var(--accent-pink);
+        }
+
+        .legal-text em {
+            color: var(--accent-mint);
+            font-style: normal;
+            font-weight: bold;
+        }
+
         /* Loading State */
         .loading-overlay {
             position: fixed;
@@ -704,6 +887,7 @@
             display: block;
             margin-bottom: 0.5rem;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .footer-section a:hover {
@@ -752,10 +936,294 @@
             .sizes-table th {
                 font-size: 1.1rem;
             }
+
+            .cookie-banner-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cookie-buttons {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .legal-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- 🍪 BANER COOKIES - OBOWIĄZKOWY PRAWNIE! -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-banner-content">
+            <div class="cookie-text">
+                <strong>🍪 Ta strona używa plików cookies</strong><br>
+                Używamy niezbędnych cookies do działania strony oraz opcjonalnych do analizy ruchu. 
+                <a href="#" onclick="openLegalModal('cookies')">Polityka cookies</a> | 
+                <a href="#" onclick="openLegalModal('privacy')">Polityka prywatności</a>
+            </div>
+            <div class="cookie-buttons">
+                <button class="cookie-btn accept" onclick="acceptAllCookies()">Akceptuj wszystkie</button>
+                <button class="cookie-btn reject" onclick="rejectOptionalCookies()">Odrzuć opcjonalne</button>
+                <button class="cookie-btn settings" onclick="openCookieSettings()">Ustawienia</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📄 MODALNE OKNA DOKUMENTÓW PRAWNYCH -->
+    
+    <!-- Polityka Prywatności -->
+    <div class="legal-modal" id="privacyModal">
+        <div class="legal-content">
+            <div class="legal-header">
+                <h2>Polityka Prywatności</h2>
+                <button class="close-legal" onclick="closeLegalModal('privacy')">&times;</button>
+            </div>
+            <div class="legal-text">
+                <h3>§1 Postanowienia ogólne</h3>
+                <p><strong>1. Administrator danych osobowych</strong><br>
+                Administratorem Twoich danych osobowych jest <em>[NAZWA FIRMY]</em>, 
+                z siedzibą w <em>[ADRES]</em>, NIP: <em>[NIP]</em>, 
+                email: <strong>buciaczeq@gmail.com</strong></p>
+
+                <h3>§2 Zakres przetwarzania danych</h3>
+                <p><strong>2. Jakie dane zbieramy?</strong></p>
+                <ul>
+                    <li><strong>Dane kontaktowe:</strong> imię, nazwisko, adres e-mail, numer telefonu</li>
+                    <li><strong>Dane do realizacji zamówień:</strong> adres dostawy, preferencje produktowe</li>
+                    <li><strong>Dane techniczne:</strong> adres IP, informacje o przeglądarce, pliki cookies</li>
+                </ul>
+
+                <h3>§3 Cele i podstawy prawne przetwarzania</h3>
+                <p><strong>3. W jakich celach przetwarzamy dane?</strong></p>
+                <ol>
+                    <li><strong>Realizacja zamówień</strong> - podstawa: wykonanie umowy (art. 6 ust. 1 lit. b RODO)</li>
+                    <li><strong>Kontakt z klientami</strong> - podstawa: zgoda (art. 6 ust. 1 lit. a RODO)</li>
+                    <li><strong>Marketing bezpośredni</strong> - podstawa: prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO)</li>
+                    <li><strong>Wypełnienie obowiązków prawnych</strong> - podstawa: obowiązek prawny (art. 6 ust. 1 lit. c RODO)</li>
+                </ol>
+
+                <h3>§4 Okres przechowywania danych</h3>
+                <p><strong>4. Jak długo przechowujemy dane?</strong></p>
+                <ul>
+                    <li><strong>Dane do realizacji zamówień:</strong> przez okres realizacji umowy + 3 lata (rękojmia)</li>
+                    <li><strong>Dane marketingowe:</strong> do momentu cofnięcia zgody</li>
+                    <li><strong>Dane księgowe:</strong> 5 lat od końca roku podatkowego</li>
+                </ul>
+
+                <h3>§5 Udostępnianie danych</h3>
+                <p><strong>5. Komu przekazujemy dane?</strong></p>
+                <ul>
+                    <li><strong>Dostawcy usług kurierskich</strong> - w celu dostarczenia zamówienia</li>
+                    <li><strong>Dostawcy usług płatniczych</strong> - w celu realizacji płatności</li>
+                    <li><strong>Podmioty uprawnione na podstawie prawa</strong> - organy państwowe</li>
+                </ul>
+
+                <h3>§6 Twoje prawa</h3>
+                <p><strong>6. Jakie prawa Ci przysługują?</strong></p>
+                <ul>
+                    <li><strong>Prawo dostępu</strong> do swoich danych osobowych</li>
+                    <li><strong>Prawo sprostowania</strong> nieprawidłowych danych</li>
+                    <li><strong>Prawo usunięcia</strong> danych ("prawo do bycia zapomnianym")</li>
+                    <li><strong>Prawo ograniczenia</strong> przetwarzania</li>
+                    <li><strong>Prawo sprzeciwu</strong> wobec przetwarzania</li>
+                    <li><strong>Prawo przenoszenia</strong> danych</li>
+                    <li><strong>Prawo cofnięcia zgody</strong> w dowolnym momencie</li>
+                    <li><strong>Prawo wniesienia skargi</strong> do Prezesa UODO</li>
+                </ul>
+
+                <h3>§7 Bezpieczeństwo danych</h3>
+                <p><strong>7. Jak zabezpieczamy dane?</strong></p>
+                <ul>
+                    <li>Szyfrowanie połączeń SSL/TLS</li>
+                    <li>Regularne kopie zapasowe</li>
+                    <li>Ograniczony dostęp do danych</li>
+                    <li>Monitoring bezpieczeństwa</li>
+                </ul>
+
+                <h3>§8 Kontakt</h3>
+                <p><strong>8. Kontakt w sprawach RODO</strong><br>
+                W sprawach dotyczących ochrony danych osobowych możesz kontaktować się z nami:
+                <br><strong>Email:</strong> buciaczeq@gmail.com
+                <br><strong>Adres:</strong> <em>[ADRES FIRMY]</em></p>
+
+                <p><em>Polityka obowiązuje od: [DATA]</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Regulamin -->
+    <div class="legal-modal" id="regulaminModal">
+        <div class="legal-content">
+            <div class="legal-header">
+                <h2>Regulamin Sklepu</h2>
+                <button class="close-legal" onclick="closeLegalModal('regulamin')">&times;</button>
+            </div>
+            <div class="legal-text">
+                <h3>§1 Postanowienia ogólne</h3>
+                <p><strong>1. Sprzedawca</strong><br>
+                Sprzedawcą jest <em>[NAZWA FIRMY]</em>, prowadząca działalność gospodarczą pod adresem:
+                <br><strong>Adres:</strong> <em>[PEŁNY ADRES]</em>
+                <br><strong>NIP:</strong> <em>[NUMER NIP]</em>
+                <br><strong>REGON:</strong> <em>[NUMER REGON]</em>
+                <br><strong>Email:</strong> buciaczeq@gmail.com
+                <br><strong>Telefon:</strong> <em>[NUMER TELEFONU]</em></p>
+
+                <p><strong>2. Definicje</strong></p>
+                <ul>
+                    <li><strong>Sklep internetowy</strong> - serwis internetowy dostępny pod adresem buciaczek.eu</li>
+                    <li><strong>Klient</strong> - osoba fizyczna, prawna lub jednostka organizacyjna, która dokonuje zakupu</li>
+                    <li><strong>Konsument</strong> - osoba fizyczna kupująca na cele niezwiązane z działalnością gospodarczą</li>
+                    <li><strong>Towar</strong> - obuwie dziecięce oferowane w Sklepie</li>
+                </ul>
+
+                <h3>§2 Oferta i składanie zamówień</h3>
+                <p><strong>3. Oferowane produkty</strong><br>
+                Sklep oferuje obuwie dziecięce w rozmiarach 22-32. Wszystkie produkty są nowe i objęte gwarancją jakości.</p>
+
+                <p><strong>4. Składanie zamówienia</strong></p>
+                <ol>
+                    <li>Wybór produktu i rozmiaru</li>
+                    <li>Dodanie do koszyka</li>
+                    <li>Wypełnienie danych kontaktowych i adresu dostawy</li>
+                    <li>Wybór metody płatności i dostawy</li>
+                    <li>Potwierdzenie zamówienia</li>
+                </ol>
+
+                <h3>§3 Ceny i płatności</h3>
+                <p><strong>5. Ceny</strong><br>
+                Ceny podane w Sklepie są cenami brutto (zawierają VAT). Cena obowiązująca to ta z momentu złożenia zamówienia.</p>
+
+                <p><strong>6. Metody płatności</strong></p>
+                <ul>
+                    <li>Przelew bankowy tradycyjny</li>
+                    <li>Płatność za pobraniem</li>
+                    <li><em>Planowane: płatności online (Stripe, PayU, Przelewy24)</em></li>
+                </ul>
+
+                <h3>§4 Dostawa</h3>
+                <p><strong>7. Sposoby dostawy</strong></p>
+                <ul>
+                    <li>Poczta Polska</li>
+                    <li>Firmy kurierskie</li>
+                    <li>Darmowa dostawa od 150 zł</li>
+                </ul>
+
+                <p><strong>8. Czas realizacji</strong><br>
+                Wysyłka następuje w ciągu 1-3 dni roboczych od potwierdzenia wpłaty.</p>
+
+                <h3>§5 Odstąpienie od umowy</h3>
+                <p><strong>9. Prawo odstąpienia dla konsumentów</strong><br>
+                Konsument ma prawo odstąpić od umowy w ciągu <strong>14 dni</strong> od otrzymania towaru, bez podania przyczyny.</p>
+
+                <p><strong>10. Wykluczenia</strong><br>
+                Prawo odstąpienia nie przysługuje w przypadku:
+                <ul>
+                    <li>Towarów używanych lub zniszczonych</li>
+                    <li>Towarów spersonalizowanych</li>
+                </ul></p>
+
+                <p><strong>11. Zwrot kosztów</strong><br>
+                Sprzedawca zwróci pieniądze w ciągu 14 dni od otrzymania oświadczenia o odstąpieniu. Koszt odesłania ponosi Klient.</p>
+
+                <h3>§6 Reklamacje i rękojmia</h3>
+                <p><strong>12. Rękojmia</strong><br>
+                Sprzedawca odpowiada za zgodność towaru z umową przez 24 miesiące (konsumenci) lub 12 miesięcy (przedsiębiorcy).</p>
+
+                <p><strong>13. Procedura reklamacyjna</strong></p>
+                <ol>
+                    <li>Zgłoszenie reklamacji na adres: buciaczeq@gmail.com</li>
+                    <li>Opisanie wady i załączenie zdjęć</li>
+                    <li>Odesłanie towaru (na koszt Sprzedawcy jeśli wada potwierdzi się)</li>
+                    <li>Rozpatrzenie w ciągu 14 dni</li>
+                </ol>
+
+                <h3>§7 Dane osobowe</h3>
+                <p><strong>14. Ochrona danych</strong><br>
+                Zasady przetwarzania danych osobowych określa <a href="#" onclick="openLegalModal('privacy')">Polityka Prywatności</a>.</p>
+
+                <h3>§8 Postanowienia końcowe</h3>
+                <p><strong>15. Prawo właściwe</strong><br>
+                W sprawach nieuregulowanych niniejszym regulaminem zastosowanie znajduje prawo polskie.</p>
+
+                <p><strong>16. Rozstrzyganie sporów</strong><br>
+                Ewentualne spory będą rozstrzygane przez sąd właściwy według kodeksu postępowania cywilnego.</p>
+
+                <p><em>Regulamin obowiązuje od: [DATA]</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Polityka Cookies -->
+    <div class="legal-modal" id="cookiesModal">
+        <div class="legal-content">
+            <div class="legal-header">
+                <h2>Polityka Cookies</h2>
+                <button class="close-legal" onclick="closeLegalModal('cookies')">&times;</button>
+            </div>
+            <div class="legal-text">
+                <h3>§1 Czym są pliki cookies?</h3>
+                <p><strong>1. Definicja</strong><br>
+                Pliki cookies to małe pliki tekstowe zapisywane na Twoim urządzeniu podczas przeglądania stron internetowych. Zawierają informacje o Twojej aktywności na stronie.</p>
+
+                <h3>§2 Jakie cookies używamy?</h3>
+                
+                <h4>🔧 Cookies niezbędne (bez zgody)</h4>
+                <p>Te pliki są konieczne do działania strony:</p>
+                <ul>
+                    <li><strong>cart_items</strong> - zapamiętuje produkty w koszyku</li>
+                    <li><strong>cookie_consent</strong> - zapamiętuje Twoje preferencje cookies</li>
+                    <li><strong>session_id</strong> - identyfikuje sesję zakupową</li>
+                </ul>
+
+                <h4>📊 Cookies analityczne (opcjonalne)</h4>
+                <p><em>Obecnie nie używamy, ale planujemy:</em></p>
+                <ul>
+                    <li><strong>Google Analytics</strong> - analiza ruchu na stronie</li>
+                    <li><strong>Statystyki produktów</strong> - najpopularniejsze rozmiary i produkty</li>
+                </ul>
+
+                <h4>🎯 Cookies marketingowe (opcjonalne)</h4>
+                <p><em>Planowane w przyszłości:</em></p>
+                <ul>
+                    <li><strong>Facebook Pixel</strong> - reklamy w mediach społecznościowych</li>
+                    <li><strong>Google Ads</strong> - spersonalizowane reklamy</li>
+                </ul>
+
+                <h3>§3 Zarządzanie cookies</h3>
+                <p><strong>2. Jak zarządzać cookies?</strong></p>
+                
+                <h4>Na tej stronie:</h4>
+                <p>Możesz zmienić ustawienia klikając przycisk poniżej:</p>
+                <p style="text-align: center; margin: 2rem 0;">
+                    <button class="cookie-btn settings" onclick="openCookieSettings()" style="padding: 1rem 2rem;">
+                        ⚙️ Zarządzaj cookies
+                    </button>
+                </p>
+
+                <h4>W przeglądarce:</h4>
+                <ul>
+                    <li><strong>Chrome:</strong> Ustawienia → Prywatność i bezpieczeństwo → Pliki cookie</li>
+                    <li><strong>Firefox:</strong> Opcje → Prywatność i bezpieczeństwo → Pliki cookie</li>
+                    <li><strong>Safari:</strong> Preferencje → Prywatność → Zarządzaj danymi stron</li>
+                    <li><strong>Edge:</strong> Ustawienia → Pliki cookie i uprawnienia witryn</li>
+                </ul>
+
+                <h3>§4 Podstawy prawne</h3>
+                <p><strong>3. Dlaczego potrzebujemy zgody?</strong><br>
+                Zgodnie z polskim prawem (ustawa Prawo komunikacji elektronicznej) musimy uzyskać zgodę na cookies nieniezbędne. Cookies niezbędne do działania strony nie wymagają zgody.</p>
+
+                <h3>§5 Kontakt</h3>
+                <p><strong>4. Pytania o cookies</strong><br>
+                W przypadku pytań skontaktuj się z nami: <strong>buciaczeq@gmail.com</strong></p>
+
+                <p><em>Polityka obowiązuje od: [DATA]</em></p>
+            </div>
+        </div>
+    </div>
+
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
@@ -813,50 +1281,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>22</td>
-                            <td>13,7</td>
-                        </tr>
-                        <tr>
-                            <td>23</td>
-                            <td>14,5</td>
-                        </tr>
-                        <tr>
-                            <td>24</td>
-                            <td>15,1</td>
-                        </tr>
-                        <tr>
-                            <td>25</td>
-                            <td>15,6</td>
-                        </tr>
-                        <tr>
-                            <td>26</td>
-                            <td>16,3</td>
-                        </tr>
-                        <tr>
-                            <td>27</td>
-                            <td>17,0</td>
-                        </tr>
-                        <tr>
-                            <td>28</td>
-                            <td>17,8</td>
-                        </tr>
-                        <tr>
-                            <td>29</td>
-                            <td>18,6</td>
-                        </tr>
-                        <tr>
-                            <td>30</td>
-                            <td>19,5</td>
-                        </tr>
-                        <tr>
-                            <td>31</td>
-                            <td>20,0</td>
-                        </tr>
-                        <tr>
-                            <td>32</td>
-                            <td>20,5</td>
-                        </tr>
+                        <tr><td>22</td><td>13,7</td></tr>
+                        <tr><td>23</td><td>14,5</td></tr>
+                        <tr><td>24</td><td>15,1</td></tr>
+                        <tr><td>25</td><td>15,6</td></tr>
+                        <tr><td>26</td><td>16,3</td></tr>
+                        <tr><td>27</td><td>17,0</td></tr>
+                        <tr><td>28</td><td>17,8</td></tr>
+                        <tr><td>29</td><td>18,6</td></tr>
+                        <tr><td>30</td><td>19,5</td></tr>
+                        <tr><td>31</td><td>20,0</td></tr>
+                        <tr><td>32</td><td>20,5</td></tr>
                     </tbody>
                 </table>
                 <div style="margin-top: 1.5rem; color: var(--text-light); font-size: 0.9rem; line-height: 1.5;">
@@ -936,6 +1371,7 @@
             <div class="footer-section">
                 <h3>O Nas</h3>
                 <p>Buciaczek to miejsce, gdzie małe stópki znajdują swoje wymarzone buciki!</p>
+                <p><strong>Email:</strong> buciaczeq@gmail.com</p>
             </div>
             <div class="footer-section">
                 <h3>Szybkie Linki</h3>
@@ -945,10 +1381,15 @@
                 <a href="#contact">Kontakt</a>
             </div>
             <div class="footer-section">
-                <h3>Informacje</h3>
-                <p>📧 buciaczeq@gmail.com</p>
-                <p>🚚 Darmowa dostawa od 150 zł</p>
-                <p>🔄 14 dni na zwrot</p>
+                <h3>📋 Informacje Prawne</h3>
+                <a onclick="openLegalModal('regulamin')">Regulamin sklepu</a>
+                <a onclick="openLegalModal('privacy')">Polityka prywatności</a>
+                <a onclick="openLegalModal('cookies')">Polityka cookies</a>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light);">
+                    🏢 <em>[NAZWA FIRMY]</em><br>
+                    📍 <em>[ADRES]</em><br>
+                    🏦 NIP: <em>[NIP]</em>
+                </p>
             </div>
         </div>
         <div style="text-align: center; padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -966,6 +1407,60 @@
         let cart = [];
         let currentFilter = 'all';
         
+        // 🍪 ZARZĄDZANIE COOKIES
+        function checkCookieConsent() {
+            const consent = localStorage.getItem('cookie_consent');
+            if (!consent) {
+                setTimeout(() => {
+                    document.getElementById('cookieBanner').classList.add('show');
+                }, 1000);
+            }
+        }
+
+        function acceptAllCookies() {
+            localStorage.setItem('cookie_consent', 'all');
+            localStorage.setItem('consent_date', new Date().toISOString());
+            document.getElementById('cookieBanner').classList.remove('show');
+            showNotification('Zaakceptowano wszystkie cookies', 'success');
+        }
+
+        function rejectOptionalCookies() {
+            localStorage.setItem('cookie_consent', 'necessary');
+            localStorage.setItem('consent_date', new Date().toISOString());
+            document.getElementById('cookieBanner').classList.remove('show');
+            showNotification('Zaakceptowano tylko niezbędne cookies', 'info');
+        }
+
+        function openCookieSettings() {
+            // Tutaj można dodać bardziej zaawansowane ustawienia
+            alert('Funkcja ustawień cookies będzie dostępna wkrótce!\n\nAktualnie możesz:\n• Akceptować wszystkie\n• Odrzucić opcjonalne\n• Zarządzać w ustawieniach przeglądarki');
+        }
+
+        // 📄 MODALNE OKNA DOKUMENTÓW PRAWNYCH
+        function openLegalModal(type) {
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeLegalModal(type) {
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Zamykanie modalnych okien przy kliknięciu tła
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('legal-modal')) {
+                e.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
         // FUNKCJE POMOCNICZE
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
@@ -1355,6 +1850,7 @@
         // INICJALIZACJA
         window.addEventListener('load', async () => {
             await loadProducts();
+            checkCookieConsent();
             
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -1365,6 +1861,22 @@
                     }
                 });
             });
+        });
+
+        // Keyboard navigation dla dostępności
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // Zamknij wszystkie modalne okna
+                document.querySelectorAll('.legal-modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+                
+                // Zamknij koszyk
+                if (document.getElementById('cartModal').classList.contains('active')) {
+                    toggleCart();
+                }
+            }
         });
     </script>
 </body>
