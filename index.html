@@ -231,7 +231,6 @@
             margin-bottom: 3rem;
         }
 
-        /* 🔧 USUNIĘTE: Filtry kategorii (zostaje tylko "wszystkie") */
         .product-filters {
             display: flex;
             justify-content: center;
@@ -295,31 +294,6 @@
             object-fit: contain;
         }
 
-        .stock-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 0.3rem 0.8rem;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .stock-badge.in-stock {
-            background: var(--success);
-            color: white;
-        }
-
-        .stock-badge.low-stock {
-            background: #F6E05E;
-            color: #744210;
-        }
-
-        .stock-badge.out-of-stock {
-            background: var(--error);
-            color: white;
-        }
-
         .product-info {
             padding: 1.5rem;
         }
@@ -376,16 +350,6 @@
             background: #f5f5f5;
         }
 
-        .size-stock {
-            font-size: 0.7em;
-            color: #666;
-            font-weight: normal;
-        }
-
-        .size-btn.unavailable .size-stock {
-            color: #999;
-        }
-
         .product-sizes-label {
             font-weight: 600;
             margin-bottom: 0.5rem;
@@ -393,7 +357,6 @@
             font-size: 0.9rem;
         }
 
-        /* ✨ NAPRAWIONE: Rozwijany opis produktu */
         .product-description {
             color: var(--text-light);
             font-size: 0.9rem;
@@ -403,7 +366,7 @@
         }
 
         .product-description.collapsed {
-            max-height: 2.8em; /* ~2 linie tekstu */
+            max-height: 2.8em;
             overflow: hidden;
             position: relative;
         }
@@ -460,7 +423,7 @@
             cursor: not-allowed;
         }
 
-        /* ✨ ZAKTUALIZOWANA: Sekcja Rozmiary */
+        /* Sekcja Rozmiary */
         .sizes-section {
             padding: 4rem 2rem;
             background: var(--pastel-mint);
@@ -512,7 +475,7 @@
             font-size: 1.3rem;
         }
 
-        /* ✨ UPROSZCZONA: Sekcja Kontakt */
+        /* Sekcja Kontakt */
         .contact-section {
             padding: 4rem 2rem;
             background: var(--pastel-blue);
@@ -818,7 +781,7 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <h1>Witaj w Magicznym Świecie Bucików!</h1>
-        <p>Najwygodniejsze i najpiękniejsze obuwie dla Twojego malucha (2-6 lat)</p>
+        <p>Najwygodniejsze i najpiękniejsze obuwie dla Twojego malucha</p>
         <a href="#products" class="cta-button">Odkryj Kolekcję</a>
     </section>
 
@@ -826,7 +789,6 @@
     <section class="products" id="products">
         <h2 class="section-title">Nasze Buciki</h2>
         
-        <!-- 🔧 ZMIENIONE: Tylko jeden przycisk "Wszystkie" -->
         <div class="product-filters">
             <button class="filter-btn active" onclick="filterProducts('all')">Wszystkie</button>
         </div>
@@ -836,7 +798,7 @@
         </div>
     </section>
 
-    <!-- ✨ ZAKTUALIZOWANA: Sekcja Rozmiary -->
+    <!-- Sekcja Rozmiary -->
     <section class="sizes-section" id="sizes">
         <div class="sizes-container">
             <h2 class="section-title">Tabela Rozmiarów</h2>
@@ -847,7 +809,7 @@
                     <thead>
                         <tr>
                             <th>Rozmiar</th>
-                            <th>Długość stópki (cm)</th>
+                            <th>Długość wkładki (cm)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -904,7 +866,7 @@
         </div>
     </section>
 
-    <!-- ✨ UPROSZCZONA: Sekcja Kontakt -->
+    <!-- Sekcja Kontakt -->
     <section class="contact-section" id="contact">
         <div class="contact-container">
             <h2 class="section-title">Skontaktuj się z nami</h2>
@@ -917,7 +879,7 @@
                 <div style="margin-top: 2rem; color: var(--text-light); font-size: 1rem;">
                     <p>🚚 <strong>Darmowa dostawa</strong> od 150 zł</p>
                     <p>📦 <strong>Realizacja zamówień:</strong> 1-3 dni</p>
-                    <p>🔄 <strong>Zwroty:</strong> 30 dni bez podania przyczyny</p>
+                    <p>🔄 <strong>Zwroty:</strong> 14 dni bez podania przyczyny</p>
                 </div>
             </div>
         </div>
@@ -986,7 +948,7 @@
                 <h3>Informacje</h3>
                 <p>📧 buciaczeq@gmail.com</p>
                 <p>🚚 Darmowa dostawa od 150 zł</p>
-                <p>🔄 30 dni na zwrot</p>
+                <p>🔄 14 dni na zwrot</p>
             </div>
         </div>
         <div style="text-align: center; padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -1028,7 +990,6 @@
             }
         }
 
-        // ✨ NAPRAWIONA: Funkcja rozwijania/zwijania opisu
         function toggleDescription(button) {
             const description = button.previousElementSibling;
             const isCollapsed = description.classList.contains('collapsed');
@@ -1148,43 +1109,29 @@
             }
         }
         
-        // FUNKCJE UI - ZAKTUALIZOWANE: Naprawiony opis
+        // FUNKCJE UI - USUNIĘTE STANY MAGAZYNOWE
         function displayProducts(productsToShow) {
             const grid = document.getElementById('productGrid');
             
             grid.innerHTML = productsToShow.map(product => {
-                const stockStatus = product.stan > 5 ? 'in-stock' : 
-                                   product.stan > 0 ? 'low-stock' : 
-                                   'out-of-stock';
-                
-                const stockText = product.stan > 5 ? 'Dostępny (' + product.stan + ' par)' :
-                                 product.stan > 0 ? 'Ostatnie ' + product.stan + ' par!' :
-                                 'Brak w magazynie';
-                
                 const productImage = product.zdjecia && product.zdjecia.length > 0 
                     ? '<img src="' + product.zdjecia[0] + '" alt="' + product.nazwa + '" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">' 
                     : '<span style="font-size: 5rem;">👟</span>';
                 
+                // USUNIĘTE ilości dostępnych par - tylko rozmiary bez stanów
                 const sizesHtml = (product.rozmiary || []).map(size => {
-                    const sizeStock = product.stanyRozmiarow ? product.stanyRozmiarow[size] : 0;
-                    const isAvailable = sizeStock > 0;
-                    
-                    return '<button class="size-btn ' + (isAvailable ? '' : 'unavailable') + '" ' +
-                           'onclick="selectSize(this, \'' + product.id + '\', \'' + size + '\')" ' +
-                           (isAvailable ? '' : 'disabled') + '>' +
+                    return '<button class="size-btn" ' +
+                           'onclick="selectSize(this, \'' + product.id + '\', \'' + size + '\')">' +
                            size + 
-                           '<span class="size-stock">(' + sizeStock + ')</span>' +
                            '</button>';
                 }).join('');
 
-                // ✨ NAPRAWIONY: Rozwijalny opis z poprawnym działaniem
                 const fullDescription = product.opis || '';
                 const needsExpansion = fullDescription.length > 100;
                 
-                return '<div class="product-card ' + (product.stan === 0 ? 'out-of-stock' : '') + '">' +
+                return '<div class="product-card">' +
                     '<div class="product-image-container">' +
                         productImage +
-                        '<span class="stock-badge ' + stockStatus + '">' + stockText + '</span>' +
                     '</div>' +
                     '<div class="product-info">' +
                         '<h3 class="product-name">' + product.nazwa + '</h3>' +
@@ -1195,30 +1142,21 @@
                         (needsExpansion ? '<button class="expand-btn" onclick="toggleDescription(this)">Pokaż więcej</button>' : '') +
                         '<div class="product-sizes-label">Wybierz rozmiar:</div>' +
                         '<div class="product-sizes">' + sizesHtml + '</div>' +
-                        '<button class="add-to-cart" onclick="addToCart(\'' + product.id + '\')" ' +
-                            (product.stan === 0 ? 'disabled' : '') + '>' +
-                            (product.stan === 0 ? 'Brak w magazynie' : 'Dodaj do koszyka') +
+                        '<button class="add-to-cart" onclick="addToCart(\'' + product.id + '\')">' +
+                            'Dodaj do koszyka' +
                         '</button>' +
                     '</div>' +
                 '</div>';
             }).join('');
         }
         
-        // ✨ UPROSZCZONA: Funkcja filtrowania (tylko "wszystkie")
         function filterProducts(category) {
-            // Funkcja zachowana dla kompatybilności, ale wyświetla wszystkie produkty
             displayProducts(products);
         }
         
         function selectSize(button, productId, size) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
-            
-            const sizeStock = product.stanyRozmiarow ? product.stanyRozmiarow[size] : 0;
-            if (sizeStock <= 0) {
-                showNotification('Ten rozmiar jest niedostępny!', 'error');
-                return;
-            }
             
             button.parentElement.querySelectorAll('.size-btn').forEach(btn => {
                 btn.classList.remove('selected');
@@ -1236,12 +1174,6 @@
             
             if (!product.selectedSize) {
                 showNotification('Wybierz rozmiar!', 'error');
-                return;
-            }
-            
-            const stockCheck = await checkStock(productId, 1, product.selectedSize);
-            if (!stockCheck.available) {
-                showNotification(stockCheck.message || 'Produkt niedostępny', 'error');
                 return;
             }
             
@@ -1424,7 +1356,6 @@
         window.addEventListener('load', async () => {
             await loadProducts();
             
-            // Smooth scrolling dla linków nawigacyjnych
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
