@@ -395,12 +395,34 @@
             font-size: 0.9rem;
         }
 
-        /* 🔧 NOWE: Style dla opisu produktu */
+        /* ✨ NOWE: Style dla rozwijalnego opisu produktu */
         .product-description {
             color: var(--text-light);
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             margin-bottom: 1rem;
             line-height: 1.4;
+            max-height: 1.4em;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .product-description.expanded {
+            max-height: 200px;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            color: var(--accent-mint);
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-bottom: 1rem;
+            padding: 0;
+        }
+
+        .expand-btn:hover {
+            color: var(--accent-pink);
         }
 
         .size-btn:disabled {
@@ -427,6 +449,92 @@
         .add-to-cart:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+        }
+
+        /* ✨ NOWA: Sekcja Kontakt */
+        .contact-section {
+            padding: 4rem 2rem;
+            background: var(--pastel-blue);
+            margin-top: 4rem;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            color: var(--accent-pink);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .contact-info p {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .contact-form h3 {
+            color: var(--accent-pink);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .contact-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .contact-form-group input,
+        .contact-form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--pastel-mint);
+            border-radius: 5px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .contact-form-group input:focus,
+        .contact-form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-mint);
+            box-shadow: 0 0 0 3px rgba(152, 217, 211, 0.2);
+        }
+
+        .contact-submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-mint));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contact-submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px var(--shadow);
         }
 
         /* Shopping Cart Modal */
@@ -593,7 +701,6 @@
             background: var(--text-dark);
             color: white;
             padding: 3rem 2rem 1rem;
-            margin-top: 4rem;
         }
 
         .footer-content {
@@ -642,6 +749,11 @@
                 gap: 1rem;
             }
 
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -682,17 +794,72 @@
     <section class="products" id="products">
         <h2 class="section-title">Nasze Buciki</h2>
         
-        <!-- Product Filters -->
+        <!-- 🔧 ZMIENIONE: Optymalizacja kategorii - usunięto mało używane -->
         <div class="product-filters">
             <button class="filter-btn active" onclick="filterProducts('all')">Wszystkie</button>
             <button class="filter-btn" onclick="filterProducts('Trampki')">Trampki</button>
             <button class="filter-btn" onclick="filterProducts('Baleriny')">Baleriny</button>
-            <button class="filter-btn" onclick="filterProducts('Kozaczki')">Kozaczki</button>
             <button class="filter-btn" onclick="filterProducts('Sandały')">Sandały</button>
         </div>
         
         <div class="product-grid" id="productGrid">
             <!-- Produkty będą załadowane z Airtable -->
+        </div>
+    </section>
+
+    <!-- ✨ NOWA: Sekcja Kontakt -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Skontaktuj się z nami</h2>
+                
+                <h3>📍 Nasza Siedziba</h3>
+                <p>ul. Bucikowa 12<br>
+                00-001 Warszawa<br>
+                Polska</p>
+
+                <h3>📞 Kontakt</h3>
+                <p><strong>Telefon:</strong> +48 123 456 789<br>
+                <strong>Email:</strong> kontakt@buciaczek.pl<br>
+                <strong>WhatsApp:</strong> +48 123 456 789</p>
+
+                <h3>🕒 Godziny Pracy</h3>
+                <p><strong>Poniedziałek - Piątek:</strong> 9:00 - 18:00<br>
+                <strong>Sobota:</strong> 10:00 - 15:00<br>
+                <strong>Niedziela:</strong> Zamknięte</p>
+
+                <h3>🚚 Dostawa</h3>
+                <p>Darmowa dostawa od 150 zł<br>
+                Realizacja zamówień: 1-3 dni robocze<br>
+                Zwroty: 30 dni bez podania przyczyny</p>
+            </div>
+
+            <div class="contact-form">
+                <h3>Napisz do nas</h3>
+                <form id="contactFormMain">
+                    <div class="contact-form-group">
+                        <label for="contactName">Imię i Nazwisko *</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    <div class="contact-form-group">
+                        <label for="contactEmail">Email *</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    <div class="contact-form-group">
+                        <label for="contactPhone">Telefon</label>
+                        <input type="tel" id="contactPhone">
+                    </div>
+                    <div class="contact-form-group">
+                        <label for="contactSubject">Temat</label>
+                        <input type="text" id="contactSubject" placeholder="np. Pytanie o produkt, Reklamacja...">
+                    </div>
+                    <div class="contact-form-group">
+                        <label for="contactMessage">Wiadomość *</label>
+                        <textarea id="contactMessage" rows="6" required placeholder="Opisz szczegółowo swoją sprawę..."></textarea>
+                    </div>
+                    <button type="submit" class="contact-submit-btn">Wyślij Wiadomość</button>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -749,9 +916,16 @@
                 <p>Buciaczek to miejsce, gdzie małe stópki znajdują swoje wymarzone buciki!</p>
             </div>
             <div class="footer-section">
-                <h3>Kontakt</h3>
+                <h3>Szybkie Linki</h3>
+                <a href="#home">Strona Główna</a>
+                <a href="#products">Produkty</a>
+                <a href="#contact">Kontakt</a>
+            </div>
+            <div class="footer-section">
+                <h3>Informacje</h3>
                 <p>📧 kontakt@buciaczek.pl</p>
                 <p>📞 +48 123 456 789</p>
+                <p>🏢 ul. Bucikowa 12, Warszawa</p>
             </div>
         </div>
         <div style="text-align: center; padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -792,6 +966,20 @@
                 loader.classList.toggle('hidden', !show);
             }
         }
+
+        // ✨ NOWA: Funkcja rozwijania/zwijania opisu
+        function toggleDescription(button, productId) {
+            const description = button.parentElement.querySelector('.product-description');
+            const isExpanded = description.classList.contains('expanded');
+            
+            if (isExpanded) {
+                description.classList.remove('expanded');
+                button.textContent = 'Pokaż więcej';
+            } else {
+                description.classList.add('expanded');
+                button.textContent = 'Pokaż mniej';
+            }
+        }
         
         // FUNKCJE API
         async function loadProducts() {
@@ -821,7 +1009,7 @@
                         stan: 5,
                         rozmiary: ['23', '24', '25', '26'],
                         kategoria: 'Trampki',
-                        opis: 'Kolorowe i wygodne'
+                        opis: 'Kolorowe i wygodne trampki dla dzieci. Wykonane z wysokiej jakości materiałów, zapewniają komfort i bezpieczeństwo podczas zabawy. Idealne na codzienne przygody małych odkrywców!'
                     },
                     {
                         id: '2',
@@ -830,16 +1018,16 @@
                         stan: 3,
                         rozmiary: ['22', '23', '24', '25'],
                         kategoria: 'Baleriny',
-                        opis: 'Idealne na przyjęcia'
+                        opis: 'Eleganckie baleriny z błyszczącym wykończeniem. Idealne na przyjęcia, uroczystości i specjalne okazje. Wygodne i piękne - każda mała księżniczka będzie zachwycona!'
                     },
                     {
                         id: '3',
-                        nazwa: 'Zimowe Kozaczki',
+                        nazwa: 'Letnie Sandały',
                         cena: 119,
-                        stan: 0,
+                        stan: 2,
                         rozmiary: ['24', '25', '26', '27'],
-                        kategoria: 'Kozaczki',
-                        opis: 'Ciepłe i wodoodporne'
+                        kategoria: 'Sandały',
+                        opis: 'Przewiewne sandały na lato. Wykonane z naturalnej skóry, z regulowanymi paskami dla idealnego dopasowania. Perfekcyjne na plażę, spacery i letnie przygody!'
                     }
                 ];
                 displayProducts(products);
@@ -859,7 +1047,7 @@
                     body: JSON.stringify({
                         productId: productId,
                         quantity: quantity,
-                        size: size  // <-- DODANE: przekazujemy rozmiar
+                        size: size
                     })
                 });
                 
@@ -917,7 +1105,7 @@
             }
         }
         
-        // FUNKCJE UI - NAPRAWIONE: Obsługa zdjęć i stanów per rozmiar
+        // FUNKCJE UI - ZAKTUALIZOWANE: Obsługa rozwijalnego opisu
         function displayProducts(productsToShow) {
             const grid = document.getElementById('productGrid');
             
@@ -934,12 +1122,10 @@
                                  product.stan > 0 ? 'Ostatnie ' + product.stan + ' par!' :
                                  'Brak w magazynie';
                 
-                // 🔧 NOWE: Prawidłowe zdjęcie lub placeholder
                 const productImage = product.zdjecia && product.zdjecia.length > 0 
                     ? '<img src="' + product.zdjecia[0] + '" alt="' + product.nazwa + '" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">' 
                     : '<span style="font-size: 5rem;">👟</span>';
                 
-                // 🔧 NOWE: Rozmiary z informacją o dostępności per rozmiar
                 const sizesHtml = (product.rozmiary || []).map(size => {
                     const sizeStock = product.stanyRozmiarow ? product.stanyRozmiarow[size] : 0;
                     const isAvailable = sizeStock > 0;
@@ -951,6 +1137,11 @@
                            '<span class="size-stock">(' + sizeStock + ')</span>' +
                            '</button>';
                 }).join('');
+
+                // ✨ NOWE: Rozwijalny opis z przyciskiem
+                const fullDescription = product.opis || '';
+                const shortDescription = fullDescription.substring(0, 80);
+                const needsExpansion = fullDescription.length > 80;
                 
                 return '<div class="product-card ' + (product.stan === 0 ? 'out-of-stock' : '') + '">' +
                     '<div class="product-image-container">' +
@@ -960,7 +1151,10 @@
                     '<div class="product-info">' +
                         '<h3 class="product-name">' + product.nazwa + '</h3>' +
                         '<div class="product-price">' + formatPrice(product.cena) + '</div>' +
-                        '<div class="product-description">' + (product.opis || '').substring(0, 100) + '...</div>' +
+                        '<div class="product-description" data-full="' + fullDescription + '">' + 
+                            (needsExpansion ? shortDescription + '...' : fullDescription) +
+                        '</div>' +
+                        (needsExpansion ? '<button class="expand-btn" onclick="toggleDescription(this, \'' + product.id + '\')">Pokaż więcej</button>' : '') +
                         '<div class="product-sizes-label">Wybierz rozmiar:</div>' +
                         '<div class="product-sizes">' + sizesHtml + '</div>' +
                         '<button class="add-to-cart" onclick="addToCart(\'' + product.id + '\')" ' +
@@ -984,7 +1178,6 @@
         }
         
         function selectSize(button, productId, size) {
-            // 🔧 SPRAWDŹ: Czy rozmiar jest dostępny
             const product = products.find(p => p.id === productId);
             if (!product) return;
             
@@ -1172,13 +1365,6 @@
                 console.log('Odpowiedź serwera:', result);
                 
                 if (result.success) {
-                    // Nie wywołujemy już updateStock - create-order robi to automatycznie
-                    // const updates = cart.map(item => ({
-                    //     productId: item.id,
-                    //     quantity: item.quantity
-                    // }));
-                    // await updateStock(updates);
-                    
                     cart = [];
                     updateCartCount();
                     
@@ -1186,7 +1372,6 @@
                     
                     toggleCart();
                     
-                    // Odświeżamy produkty po 2 sekundach
                     setTimeout(async () => {
                         await loadProducts();
                     }, 2000);
@@ -1201,11 +1386,34 @@
                 showLoading(false);
             }
         }
+
+        // ✨ NOWA: Obsługa formularza kontaktowego
+        function handleContactForm(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const phone = document.getElementById('contactPhone').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            if (!name || !email || !message) {
+                showNotification('Wypełnij wszystkie wymagane pola!', 'error');
+                return;
+            }
+            
+            // Tutaj można dodać rzeczywistą integrację z API
+            showNotification('Wiadomość została wysłana! Odpowiemy w ciągu 24h.', 'success');
+            
+            // Czyszczenie formularza
+            document.getElementById('contactFormMain').reset();
+        }
         
         // INICJALIZACJA
         window.addEventListener('load', async () => {
             await loadProducts();
             
+            // Smooth scrolling dla linków nawigacyjnych
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -1215,6 +1423,9 @@
                     }
                 });
             });
+
+            // Obsługa formularza kontaktowego
+            document.getElementById('contactFormMain').addEventListener('submit', handleContactForm);
         });
     </script>
 </body>
