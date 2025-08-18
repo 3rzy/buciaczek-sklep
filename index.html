@@ -1486,12 +1486,12 @@
                 console.error('Błąd:', error);
                 showNotification('Nie udało się załadować produktów. Używam danych przykładowych.', 'error');
                 
-                // Dane przykładowe
+                // 🔧 NAPRAWIONE: Wszystkie ceny ujednolicone na 90.00 zł
                 products = [
                     {
                         id: '1',
                         nazwa: 'Tęczowe Trampki',
-                        cena: 89,
+                        cena: 90.00,
                         stan: 5,
                         rozmiary: ['23', '24', '25', '26'],
                         kategoria: 'Trampki',
@@ -1500,7 +1500,7 @@
                     {
                         id: '2',
                         nazwa: 'Błyszczące Baleriny',
-                        cena: 79,
+                        cena: 90.00,
                         stan: 3,
                         rozmiary: ['22', '23', '24', '25'],
                         kategoria: 'Baleriny',
@@ -1509,7 +1509,7 @@
                     {
                         id: '3',
                         nazwa: 'Letnie Sandały',
-                        cena: 99,
+                        cena: 90.00,
                         stan: 2,
                         rozmiary: ['24', '25', '26', '27'],
                         kategoria: 'Sandały',
